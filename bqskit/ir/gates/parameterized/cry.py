@@ -1,12 +1,10 @@
 """This module implements the CRYGate."""
 from __future__ import annotations
 
-import numpy as np
-from openqudit.expressions import UnitaryExpression as _UnitaryExpression
+from openqudit.expressions import Controlled as _Controlled
+from openqudit.expressions import RYGate as _RYGate
 
 from bqskit.ir.gate import Gate
-from bqskit.qis.unitary.unitary import RealVector
-from bqskit.qis.unitary.unitarymatrix import UnitaryMatrix
 from bqskit.utils.cachedclass import CachedClass
 
 
@@ -32,24 +30,4 @@ class CRYGate(
     _num_qudits = 2
     _num_params = 1
     _qasm_name = 'cry'
-    _expr = _UnitaryExpression(
-        'CRY(t0) { [[1,0,0,0],[0,1,0,0],'
-        '[0,0,cos(t0/2),~sin(t0/2)],'
-        '[0,0,sin(t0/2),cos(t0/2)]] }',
-    )
-
-    def get_unitary(self, params: RealVector = []) -> UnitaryMatrix:
-        """Return the unitary for this gate, see :class:`Unitary` for more."""
-        self.check_parameters(params)
-
-        cos = np.cos(params[0] / 2)
-        sin = np.sin(params[0] / 2)
-
-        return UnitaryMatrix(
-            [
-                [1, 0, 0, 0],
-                [0, 1, 0, 0],
-                [0, 0, cos, -sin],
-                [0, 0, sin, cos],
-            ],
-        )
+    _expr = _Controlled(_RYGate())
