@@ -139,7 +139,7 @@ def state_likes(
     return draw(sampled_from([vec, vec.numpy]))
 
 
-_GATE_BASE_CLASSES = {'ComposedGate', 'QuditGate', 'GeneralGate'}
+_GATE_BASE_CLASSES = {'ComposedGate', 'GeneralGate'}
 
 gate_instances: list[Gate] = []
 for gate_class_str in bqskit.ir.gates.__all__:

@@ -3,12 +3,12 @@ from __future__ import annotations
 
 from openqudit.expressions import ZGate as _ZGate
 
-from bqskit.ir.gates.quditgate import QuditGate
+from bqskit.ir.gate import Gate
 from bqskit.utils.cachedclass import CachedClass
 from bqskit.utils.typing import is_integer
 
 
-class ClockGate(QuditGate, CachedClass):
+class ClockGate(Gate, CachedClass):
     """
     The one-qudit clock (Z) gate. This is a Weyl-Heisenberg gate.
 

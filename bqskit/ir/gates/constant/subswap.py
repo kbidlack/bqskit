@@ -4,13 +4,13 @@ from __future__ import annotations
 import numpy as np
 from openqudit.expressions import UnitaryExpression as _UnitaryExpression
 
-from bqskit.ir.gates.quditgate import QuditGate
+from bqskit.ir.gate import Gate
 from bqskit.qis.unitary.unitarymatrix import UnitaryMatrix
 from bqskit.utils.cachedclass import CachedClass
 from bqskit.utils.typing import is_integer
 
 
-class SubSwapGate(QuditGate, CachedClass):
+class SubSwapGate(Gate, CachedClass):
     """
     The two-qudit subspace SWAP gate.
 

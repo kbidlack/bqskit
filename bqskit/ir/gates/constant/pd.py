@@ -3,12 +3,12 @@ from __future__ import annotations
 
 from openqudit.expressions import UnitaryExpression as _UnitaryExpression
 
-from bqskit.ir.gates.quditgate import QuditGate
+from bqskit.ir.gate import Gate
 from bqskit.utils.cachedclass import CachedClass
 from bqskit.utils.typing import is_integer
 
 
-class PDGate(QuditGate, CachedClass):
+class PDGate(Gate, CachedClass):
     """
     The one-qudit P[i] gate.
 

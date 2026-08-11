@@ -3,12 +3,12 @@ from __future__ import annotations
 
 from openqudit.expressions import XGate as _XGate
 
-from bqskit.ir.gates.quditgate import QuditGate
+from bqskit.ir.gate import Gate
 from bqskit.utils.cachedclass import CachedClass
 from bqskit.utils.typing import is_integer
 
 
-class ShiftGate(QuditGate, CachedClass):
+class ShiftGate(Gate, CachedClass):
     """
     The one-qudit shift (X) gate. This is a Weyl-Heisenberg gate.
 

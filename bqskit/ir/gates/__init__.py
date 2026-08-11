@@ -131,7 +131,6 @@ BQSKit Gates (:mod:`bqskit.ir.gates`) =====================================
     :template: autosummary/gate.rst
 
     ComposedGate
-    QuditGate
     GeneralGate
 """
 from __future__ import annotations
@@ -147,12 +146,10 @@ from bqskit.ir.gates.generalgate import GeneralGate
 from bqskit.ir.gates.measure import MeasurementPlaceholder
 from bqskit.ir.gates.parameterized import *  # noqa
 from bqskit.ir.gates.parameterized import __all__ as parameterized_all
-from bqskit.ir.gates.quditgate import QuditGate
 from bqskit.ir.gates.reset import Reset
 
 __all__: list[str] = composed_all + constant_all + parameterized_all
 __all__ += ['ComposedGate']
-__all__ += ['QuditGate']
 __all__ += [
     'CircuitGate', 'MeasurementPlaceholder',
     'Reset', 'BarrierPlaceholder',

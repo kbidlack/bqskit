@@ -5,11 +5,10 @@ import numpy as np
 from openqudit.expressions import UnitaryExpression as _UnitaryExpression
 
 from bqskit.ir.gates.constantgate import ConstantGate
-from bqskit.ir.gates.quditgate import QuditGate
 from bqskit.utils.typing import is_integer
 
 
-class CSUMGate(QuditGate, ConstantGate):
+class CSUMGate(ConstantGate):
     """
     The two-qudit Conditional-SUM gate.
 
@@ -63,16 +62,14 @@ class CSUMGate(QuditGate, ConstantGate):
         if radix < 2:
             raise ValueError(f'Radix must be greater than 1, got {radix}.')
 
-        self._radix = radix
-
-        matrix = np.zeros([self.radix**2, self.radix**2])
-        for i in range(self.radix):
-            for j in range(self.radix):
-                row = self.radix * i + ((i + j) % self.radix)
-                col = self.radix * i + j
+        matrix = np.zeros([radix**2, radix**2])
+        for i in range(radix):
+            for j in range(radix):
+                row = radix * i + ((i + j) % radix)
+                col = radix * i + j
                 matrix[row, col] = 1.0
 
-        dim = self.radix ** 2
+        dim = radix ** 2
         rows = [
             '[' + ','.join(
                 '1' if matrix[r, c] else '0' for c in range(dim)
@@ -81,5 +78,5 @@ class CSUMGate(QuditGate, ConstantGate):
         ]
         self._expr = _UnitaryExpression(
             'CSUM%d<%d,%d>() { [%s] }'
-            % (self.radix, self.radix, self.radix, ','.join(rows)),
+            % (radix, radix, radix, ','.join(rows)),
         )

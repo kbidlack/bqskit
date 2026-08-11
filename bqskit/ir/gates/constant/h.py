@@ -4,12 +4,11 @@ from __future__ import annotations
 from openqudit.expressions import HGate as _HGate
 
 from bqskit.ir.gates.constantgate import ConstantGate
-from bqskit.ir.gates.quditgate import QuditGate
 from bqskit.utils.cachedclass import CachedClass
 from bqskit.utils.typing import is_integer
 
 
-class HGate(ConstantGate, QuditGate, CachedClass):
+class HGate(ConstantGate, CachedClass):
     """
     The one-qudit Hadamard gate. This is a Clifford gate.
 
