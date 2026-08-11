@@ -33,7 +33,7 @@ from bqskit.ir.gates.parameterized.u3 import U3Gate
 from bqskit.ir.gates.parameterized.u8 import U8Gate
 from bqskit.ir.gates.parameterized.unitary import VariableUnitaryGate
 
-__all__ = [
+__all__: list[str] = [
     'CCPGate',
     'CKMGate',
     'CKMdgGate',

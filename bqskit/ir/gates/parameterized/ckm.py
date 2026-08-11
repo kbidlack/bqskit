@@ -1,12 +1,9 @@
 """This module implments the CKMGate."""
 from __future__ import annotations
 
-import numpy as np
-import numpy.typing as npt
+from openqudit.expressions import UnitaryExpression as _UnitaryExpression
 
 from bqskit.ir.gate import Gate
-from bqskit.qis.unitary.unitary import RealVector
-from bqskit.qis.unitary.unitarymatrix import UnitaryMatrix
 from bqskit.utils.cachedclass import CachedClass
 
 
@@ -31,76 +28,18 @@ class CKMGate(Gate, CachedClass):
     _radixes = (3,)
     _num_params = 4
 
-    def get_unitary(self, params: RealVector = []) -> UnitaryMatrix:
-        """Return the unitary for this gate, see :class:`Unitary` for more."""
-        self.check_parameters(params)
-        # Parameters are mapped to the reference above as follows:
-        #   - params[0] -> 1-3
-        #   - params[1] -> 1-2
-        #   - params[2] -> 2-3
-        #   - params[3] -> cp
+    _expr = _UnitaryExpression("""CKM<3>(t13, t12, t23, cp) {
+        [
+            [cos(t13)*cos(t12),
+            cos(t13)*sin(t12),
+            sin(t13)*e^(~i*cp)],
 
-        s1 = np.sin(params[0])
-        c1 = np.cos(params[0])
-        s2 = np.sin(params[1])
-        c2 = np.cos(params[1])
-        s3 = np.sin(params[2])
-        c3 = np.cos(params[2])
+            [~cos(t23)*sin(t12) - sin(t23)*sin(t13)*cos(t12)*e^(i*cp),
+            cos(t23)*cos(t12) - sin(t23)*sin(t13)*sin(t12)*e^(i*cp),
+            sin(t23)*cos(t13)],
 
-        p1 = np.exp(1j * params[3])
-        m1 = np.exp(-1j * params[3])
-
-        u1 = np.array([[1, 0, 0], [0, c3, s3], [0, -s3, c3]])
-        u2 = np.array([[c1, 0, s1 * m1], [0, 1, 0], [-s1 * p1, 0, c1]])
-        u3 = np.array([[c2, s2, 0], [-s2, c2, 0], [0, 0, 1]])
-
-        return UnitaryMatrix(u1 @ u2 @ u3, self.radixes)
-
-    def get_grad(self, params: RealVector = []) -> npt.NDArray[np.complex128]:
-        """
-        Return the gradient for this gate.
-
-        See :class:`~bqskit.ir.gate.Gate` for more info.
-        """
-        self.check_parameters(params)
-
-        s1 = np.sin(params[0])
-        c1 = np.cos(params[0])
-        s2 = np.sin(params[1])
-        c2 = np.cos(params[1])
-        s3 = np.sin(params[2])
-        c3 = np.cos(params[2])
-
-        p1 = np.exp(1j * params[3])
-        m1 = np.exp(-1j * params[3])
-
-        u1 = np.array([[1, 0, 0], [0, c3, s3], [0, -s3, c3]])
-        u2 = np.array([[c1, 0, s1 * m1], [0, 1, 0], [-s1 * p1, 0, c1]])
-        u3 = np.array([[c2, s2, 0], [-s2, c2, 0], [0, 0, 1]])
-
-        u1p = np.array([[0, 0, 0], [0, -s3, c3], [0, -c3, -s3]])
-        u2p1 = np.array([
-            [-s1, 0, c1 * m1], [0, 0, 0],
-            [-c1 * m1, 0, s1],
-        ])
-        u2p2 = np.array([
-            [0, 0, -1j * s1 * m1], [0, 0, 0],
-            [-1j * s1 * p1, 0, 0],
-        ])
-        u3p = np.array([[s2, c2, 0], [-c2, -s2, 0], [0, 0, 0]])
-
-        return np.array(
-            [
-                # wrt params[0] -> 1-3
-                u1 @ u2p1 @ u3,
-
-                # wrt params[1] -> 1-2
-                u1 @ u2 @ u3p,
-
-                # wrt params[2] -> 2-3
-                u1p @ u2 @ u3,
-
-                # wrt params[3] -> cp
-                u1 @ u2p2 @ u3,
-            ], dtype=np.complex128,
-        )
+            [ sin(t23)*sin(t12) - cos(t23)*sin(t13)*cos(t12)*e^(i*cp),
+            ~sin(t23)*cos(t12) - cos(t23)*sin(t13)*sin(t12)*e^(i*cp),
+            cos(t23)*cos(t13)],
+        ]
+    }""")
