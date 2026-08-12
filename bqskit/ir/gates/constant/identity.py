@@ -3,11 +3,9 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
-import numpy as np
 from openqudit.expressions import UnitaryExpression
 
 from bqskit.ir.gate import Gate
-from bqskit.qis.unitary.unitarymatrix import UnitaryMatrix
 from bqskit.utils.cachedclass import CachedClass
 from bqskit.utils.typing import is_valid_radixes
 
@@ -38,13 +36,10 @@ class IdentityGate(Gate, CachedClass):
         if len(radixes) != 0 and not is_valid_radixes(radixes, num_qudits):
             raise TypeError('Invalid radixes.')
 
-        self._num_qudits = num_qudits
-        self._radixes = tuple(radixes or [2] * num_qudits)
-        self._dim = int(np.prod(self.radixes))
+        radixes = tuple(radixes or [2] * num_qudits)
         self._expr = UnitaryExpression.identity(
-            'I%d' % num_qudits, self.radixes,
+            'I%d' % num_qudits, radixes,
         )
-        self._utry = UnitaryMatrix(self._expr(), self.radixes)
         self._qasm_name = 'identity%d' % self.num_qudits
 
     def get_qasm_gate_def(self) -> str:

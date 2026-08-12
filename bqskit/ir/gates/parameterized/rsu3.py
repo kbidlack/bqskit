@@ -1,12 +1,9 @@
 """This module implements the rotations due to the generatos of SU(3)."""
 from __future__ import annotations
 
-import numpy as np
 from openqudit.expressions import UnitaryExpression as _UnitaryExpression
 
 from bqskit.ir.gate import Gate
-from bqskit.qis.unitary.unitary import RealVector
-from bqskit.qis.unitary.unitarymatrix import UnitaryMatrix
 from bqskit.utils.cachedclass import CachedClass
 from bqskit.utils.typing import is_integer
 
@@ -44,9 +41,6 @@ class RSU3Gate(Gate, CachedClass):
           Howard Georgi
     """
 
-    _num_qudits = 1
-    _num_params = 1
-
     def __init__(self, index: int) -> None:
         """
         Construct a RSU3Gate.
@@ -67,52 +61,3 @@ class RSU3Gate(Gate, CachedClass):
 
         self.index = index
         self._expr = _UnitaryExpression(_SU3_GENERATOR_QGL[index])
-
-    def get_unitary(self, params: RealVector = []) -> UnitaryMatrix:
-        """Return the unitary for this gate, see :class:`Unitary` for more."""
-
-        self.check_parameters(params)
-
-        cos = np.cos(params[0])
-        sin = np.sin(params[0])
-
-        matrix = np.eye(3, dtype=np.complex128)
-
-        if self.index == 0:
-            matrix[0, 0] = cos
-            matrix[1, 1] = cos
-            matrix[0, 1] = -1j * sin
-            matrix[1, 0] = -1j * sin
-        elif self.index == 1:
-            matrix[0, 0] = cos
-            matrix[1, 1] = cos
-            matrix[0, 1] = -sin
-            matrix[1, 0] = sin
-        elif self.index == 2:
-            matrix[0, 0] = np.exp(-1j * params[0])
-            matrix[1, 1] = np.exp(1j * params[0])
-        elif self.index == 3:
-            matrix[0, 0] = cos
-            matrix[2, 2] = cos
-            matrix[0, 2] = -1j * sin
-            matrix[2, 0] = -1j * sin
-        elif self.index == 4:
-            matrix[0, 0] = cos
-            matrix[2, 2] = cos
-            matrix[0, 2] = -sin
-            matrix[2, 0] = sin
-        elif self.index == 5:
-            matrix[1, 1] = cos
-            matrix[2, 2] = cos
-            matrix[1, 2] = -1j * sin
-            matrix[2, 1] = -1j * sin
-        elif self.index == 6:
-            matrix[1, 1] = cos
-            matrix[2, 2] = cos
-            matrix[1, 2] = -sin
-            matrix[2, 1] = sin
-        elif self.index == 7:
-            matrix[0, 0] = np.exp(-1j * params[0] / np.sqrt(3))
-            matrix[1, 1] = np.exp(-1j * params[0] / np.sqrt(3))
-            matrix[2, 2] = np.exp(2j * params[0] / np.sqrt(3))
-        return UnitaryMatrix(matrix, self.radixes)

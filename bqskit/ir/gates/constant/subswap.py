@@ -19,9 +19,6 @@ class SubSwapGate(Gate, CachedClass):
     |20> rows swapped.
     """
 
-    _num_qudits = 2
-    _num_params = 0
-
     def __init__(self, radix: int, qudit_levels: str) -> None:
         """
         Construct a SubSwapGate.
@@ -53,7 +50,6 @@ class SubSwapGate(Gate, CachedClass):
                 f', got {type(qudit_levels)}.',
             )
 
-        self._radix = radix
         level1, level2 = self.decode_qudit_level_string(qudit_levels)
         self._expr = self.calculate_level_swap_expr(radix, level1, level2)
 

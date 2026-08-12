@@ -6,11 +6,10 @@ from functools import reduce
 
 import numpy as np
 import numpy.typing as npt
+from openqudit.expressions import Controlled as _Controlled
 
 from bqskit.ir.gate import Gate
 from bqskit.ir.gates.composedgate import ComposedGate
-from bqskit.qis.unitary.unitary import RealVector
-from bqskit.qis.unitary.unitarymatrix import UnitaryMatrix
 from bqskit.utils.typing import is_integer
 from bqskit.utils.typing import is_sequence
 from bqskit.utils.typing import is_sequence_of_int
@@ -257,6 +256,12 @@ class ControlledGate(ComposedGate):
         num_controls, control_radixes, control_levels = params
         self.num_controls, self.control_radixes, self.control_levels = params
 
+        self._expr = _Controlled(
+            self.gate._expr,
+            self.control_radixes,
+            self.control_levels,
+        )
+
         self._radixes = tuple(tuple(control_radixes) + self.gate.radixes)
         self._num_qudits = gate.num_qudits + self.num_controls
         # TODO: Incorporate control radixes/levels into name with function def.
@@ -301,35 +306,6 @@ class ControlledGate(ComposedGate):
             )
         return qasm_name
 
-    def get_unitary(self, params: RealVector = []) -> UnitaryMatrix:
-        """Return the unitary for this gate, see :class:`Unitary` for more."""
-        U = self.gate.get_unitary(params)
-        ctrl_U = np.kron(self.ctrl, U) + self.ihalf
-        return UnitaryMatrix(ctrl_U, self.radixes)
-
-    def get_grad(self, params: RealVector = []) -> npt.NDArray[np.complex128]:
-        """
-        Return the gradient for this gate.
-
-        See :class:`~bqskit.ir.gate.Gate` for more info.
-        """
-        grads = self.gate.get_grad(params)
-        return np.kron(self.ctrl, grads).astype(np.complex128)
-
-    def get_unitary_and_grad(
-        self,
-        params: RealVector = [],
-    ) -> tuple[UnitaryMatrix, npt.NDArray[np.complex128]]:
-        """
-        Return the unitary and gradient for this gate.
-
-        See :class:`~bqskit.ir.gate.Gate` for more info.
-        """
-        U, grads = self.gate.get_unitary_and_grad(params)
-        ctrl_U = np.kron(self.ctrl, U) + self.ihalf
-        ctl_grads = np.kron(self.ctrl, grads).astype(np.complex128)
-        return UnitaryMatrix(ctrl_U, self.radixes), ctl_grads
-
     def __eq__(self, other: object) -> bool:
         return (
             isinstance(other, ControlledGate)
@@ -341,6 +317,9 @@ class ControlledGate(ComposedGate):
 
     def __hash__(self) -> int:
         return hash((self.gate, self.radixes))
+
+    def __repr__(self) -> str:
+        return f"ControlledGate({self.gate.__class__.__name__}())"
 
     @staticmethod
     def build_control_proj(

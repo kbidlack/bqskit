@@ -23,7 +23,6 @@ class SycamoreGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
     _qasm_name = 'syc'
     _expr = _UnitaryExpression(
         'Sycamore() { [[1,0,0,0],[0,0,~i,0],'

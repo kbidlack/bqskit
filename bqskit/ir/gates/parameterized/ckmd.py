@@ -24,10 +24,6 @@ class CKMdgGate(Gate, CachedClass):
           setting each parameter.
     """
 
-    _num_qudits = 1
-    _radixes = (3,)
-    _num_params = 4
-
     _expr = _UnitaryExpression("""CKMdg<3>(t13, t12, t23, cp) {
         [
             [cos(t13)*cos(t12),

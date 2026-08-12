@@ -22,8 +22,6 @@ class ArbitraryCPhaseGate(
 ):
     """A gate representing an arbitrary qudit controlled phase rotation."""
 
-    _num_params = 1
-
     def __init__(self, radixes: Sequence[int] = []) -> None:
         if len(radixes) == 0:
             radixes = [2, 2]
@@ -48,8 +46,8 @@ class ArbitraryCPhaseGate(
 
         self._expr = _UnitaryExpression(
             'ArbitraryCPhase_{}<{}>(t0) {{ [{}] }}'.format(
-                '_'.join(str(r) for r in self._radixes),
-                ','.join(str(r) for r in self._radixes),
+                '_'.join(str(r) for r in self.radixes),
+                ','.join(str(r) for r in self.radixes),
                 ','.join(rows),
             ),
         )

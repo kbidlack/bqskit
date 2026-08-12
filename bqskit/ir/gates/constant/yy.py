@@ -23,7 +23,6 @@ class YYGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
     _qasm_name = 'ryy(pi/2)'
     _expr = _UnitaryExpression(
         'YY() { [[sqrt(2)/2,0,0,i*sqrt(2)/2],'

@@ -21,6 +21,4 @@ class ZGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 1
-    _qasm_name = 'z'
     _expr = _ZGate()

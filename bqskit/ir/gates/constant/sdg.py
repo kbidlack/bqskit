@@ -20,6 +20,4 @@ class SdgGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 1
-    _qasm_name = 'sdg'
     _expr = _Dagger(_SGate())

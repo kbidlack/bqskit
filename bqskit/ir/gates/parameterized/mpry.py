@@ -1,8 +1,6 @@
 """This module implements the MPRYGate."""
 from __future__ import annotations
 
-import typing
-
 import numpy as np
 import numpy.typing as npt
 from openqudit.expressions import UnitaryExpression as _UnitaryExpression
@@ -10,7 +8,6 @@ from openqudit.expressions import UnitaryExpression as _UnitaryExpression
 from bqskit.ir.gate import Gate
 from bqskit.qis.unitary.optimizable import LocallyOptimizableUnitary
 from bqskit.qis.unitary.unitary import RealVector
-from bqskit.qis.unitary.unitarymatrix import UnitaryMatrix
 from bqskit.utils.cachedclass import CachedClass
 
 
@@ -74,14 +71,14 @@ class MPRYGate(
 
         dim = 2 ** num_qudits
         rows = [['0'] * dim for _ in range(dim)]
-        for i in range(self._num_params):
+        for i in range(self.num_params):
             x1, x2 = get_indices(i, self.target_qubit, num_qudits)
             rows[x1][x1] = 'cos(t%d/2)' % i
             rows[x2][x2] = 'cos(t%d/2)' % i
             rows[x2][x1] = 'sin(t%d/2)' % i
             rows[x1][x2] = '~sin(t%d/2)' % i
         row_strs = ['[' + ','.join(row) + ']' for row in rows]
-        params_str = ','.join('t%d' % i for i in range(self._num_params))
+        params_str = ','.join('t%d' % i for i in range(self.num_params))
         self._expr = _UnitaryExpression(
             'MPRY%d<%s>(%s) { [%s] }' % (
                 num_qudits,
@@ -90,35 +87,6 @@ class MPRYGate(
                 ','.join(row_strs),
             ),
         )
-
-    def get_unitary(self, params: RealVector = []) -> UnitaryMatrix:
-        """Return the unitary for this gate, see :class:`Unitary` for more."""
-        self.check_parameters(params)
-
-        matrix = np.zeros(
-            (
-                2 ** self.num_qudits,
-                2 ** self.num_qudits,
-            ), dtype=np.complex128,
-        )
-        for i, param in enumerate(typing.cast(typing.Sequence[float], params)):
-            cos = np.cos(param / 2)
-            sin = np.sin(param / 2)
-
-            # Now, get indices based on target qubit.
-            # i corresponds to the configuration of the
-            # select qubits (e.g 5 = 101). Now, the
-            # target qubit is 0,1 for both the row and col
-            # indices. So, if i = 5 and the target_qubit is 2
-            # Then the rows/cols are 1001 and 1101
-            x1, x2 = get_indices(i, self.target_qubit, self.num_qudits)
-
-            matrix[x1, x1] = cos
-            matrix[x2, x2] = cos
-            matrix[x2, x1] = sin
-            matrix[x1, x2] = -1 * sin
-
-        return UnitaryMatrix(matrix)
 
     def optimize(self, env_matrix: npt.NDArray[np.complex128]) -> list[float]:
         """

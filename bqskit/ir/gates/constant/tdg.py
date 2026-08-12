@@ -20,6 +20,4 @@ class TdgGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 1
-    _qasm_name = 'tdg'
     _expr = _Dagger(_TGate())

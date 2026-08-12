@@ -19,6 +19,5 @@ class SqrtTGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 1
     _qasm_name = 'st'
     _expr = _UnitaryExpression('SqrtT() { [[1,0],[0,e^(i*pi/8)]] }')

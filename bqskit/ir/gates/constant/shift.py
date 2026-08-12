@@ -5,7 +5,6 @@ from openqudit.expressions import XGate as _XGate
 
 from bqskit.ir.gate import Gate
 from bqskit.utils.cachedclass import CachedClass
-from bqskit.utils.typing import is_integer
 
 
 class ShiftGate(Gate, CachedClass):
@@ -39,8 +38,6 @@ class ShiftGate(Gate, CachedClass):
         - https://arxiv.org/pdf/2302.07966.pdf
     """
 
-    _num_qudits = 1
-
     def __init__(self, radix: int = 2) -> None:
         """
         Construct a ShiftGate.
@@ -52,11 +49,5 @@ class ShiftGate(Gate, CachedClass):
         Raises:
             ValueError: if radix < 2
         """
-        if not is_integer(radix):
-            raise TypeError(f'Expected integer for radix, got {type(radix)}.')
 
-        if radix < 2:
-            raise ValueError(f'Radix must be greater than 1, got {radix}.')
-
-        self._radix = radix
         self._expr = _XGate(radix)

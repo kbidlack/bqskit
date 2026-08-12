@@ -27,7 +27,4 @@ class CRXGate(
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
-    _num_params = 1
-    _qasm_name = 'crx'
     _expr = _Controlled(_RXGate())

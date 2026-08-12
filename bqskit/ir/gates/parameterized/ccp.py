@@ -1,4 +1,5 @@
 """This module implements the CCPGate."""
+
 from __future__ import annotations
 
 from openqudit.expressions import Controlled as _Controlled
@@ -31,7 +32,5 @@ class CCPGate(
         \\end{pmatrix}
     """
 
-    _num_qudits = 3
-    _num_params = 1
     _qasm_name = 'ccp'
     _expr = _Controlled(_Controlled(_PGate()))

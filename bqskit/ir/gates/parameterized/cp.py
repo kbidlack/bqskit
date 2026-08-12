@@ -27,7 +27,4 @@ class CPGate(
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
-    _num_params = 1
-    _qasm_name = 'cp'
     _expr = _Controlled(_PGate())

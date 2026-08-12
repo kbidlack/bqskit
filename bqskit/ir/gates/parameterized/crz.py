@@ -27,7 +27,4 @@ class CRZGate(
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
-    _num_params = 1
-    _qasm_name = 'crz'
     _expr = _Controlled(_RZGate())

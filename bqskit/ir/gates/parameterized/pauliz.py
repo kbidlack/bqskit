@@ -45,10 +45,7 @@ class PauliZGate(GeneralGate):
         if num_qudits <= 0:
             raise ValueError(f'Expected positive integer, got {num_qudits}')
 
-        self._name = f'PauliZGate({num_qudits})'
-        self._num_qudits = num_qudits
-        self._radixes = tuple([2] * num_qudits)
-        paulizs = PauliZMatrices(self.num_qudits)
+        paulizs = PauliZMatrices(num_qudits)
         self._num_params = len(paulizs)
         if building_docs():
             self.sigmav: npt.NDArray[Any] = np.array([])

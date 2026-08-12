@@ -6,22 +6,6 @@ from openqudit.expressions import UnitaryExpression as _UnitaryExpression
 from bqskit.ir.gate import Gate
 from bqskit.utils.cachedclass import CachedClass
 
-_cpi_expr = _UnitaryExpression("""
-CPI<3, 3>() {
-    [
-        [1, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 1, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 1],
-    ]
-}
-""")
-
 
 class CPIGate(Gate, CachedClass):
     """
@@ -44,5 +28,18 @@ class CPIGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
-    _expr = _cpi_expr
+    _expr = _UnitaryExpression("""
+    CPI<3, 3>() {
+        [
+            [1, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 1],
+        ]
+    }
+    """)

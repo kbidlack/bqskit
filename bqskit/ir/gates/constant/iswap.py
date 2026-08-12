@@ -23,7 +23,6 @@ class ISwapGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
     _qasm_name = 'iswap'
     _expr = _UnitaryExpression(
         'ISwap() { [[1,0,0,0],[0,0,i,0],[0,i,0,0],[0,0,0,1]] }',

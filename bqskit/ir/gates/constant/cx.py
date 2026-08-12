@@ -24,8 +24,6 @@ class CNOTGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _name = 'CNOTGate'
-    _qasm_name = 'cx'
     _expr = _Controlled(_XGate())
 
 

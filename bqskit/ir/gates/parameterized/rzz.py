@@ -26,5 +26,4 @@ class RZZGate(
         \\end{pmatrix}
     """
 
-    _qasm_name = 'rzz'
     _expr = _RZZGate()

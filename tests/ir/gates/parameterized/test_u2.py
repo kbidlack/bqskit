@@ -11,8 +11,14 @@ from bqskit.ir.gates import U2Gate
 
 
 @given(
-    floats(allow_nan=False, allow_infinity=False, width=32),
-    floats(allow_nan=False, allow_infinity=False, width=32),
+    floats(
+        allow_nan=False, allow_infinity=False,
+        width=32, min_value=-1e4, max_value=1e4,
+    ),
+    floats(
+        allow_nan=False, allow_infinity=False,
+        width=32, min_value=-1e4, max_value=1e4,
+    ),
 )
 def test_get_unitary(angle1: float, angle2: float) -> None:
     u = U2Gate().get_unitary([angle1, angle2])

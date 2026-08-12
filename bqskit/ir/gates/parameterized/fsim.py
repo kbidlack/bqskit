@@ -1,12 +1,9 @@
 """This module implements the FSIMGate."""
 from __future__ import annotations
 
-import numpy as np
 from openqudit.expressions import UnitaryExpression as _UnitaryExpression
 
 from bqskit.ir.gate import Gate
-from bqskit.qis.unitary.unitary import RealVector
-from bqskit.qis.unitary.unitarymatrix import UnitaryMatrix
 from bqskit.utils.cachedclass import CachedClass
 
 
@@ -34,8 +31,6 @@ class FSIMGate(
         https://quantumai.google/reference/python/cirq/ops/FSimGate
     """
 
-    _num_qudits = 2
-    _num_params = 2
     _qasm_name = 'fsim'
     _expr = _UnitaryExpression(
         'FSIM(t0,t1) { [[1,0,0,0],'
@@ -43,20 +38,3 @@ class FSIMGate(
         '[0,~i*sin(t0),cos(t0),0],'
         '[0,0,0,e^(~i*t1)]] }',
     )
-
-    def get_unitary(self, params: RealVector = []) -> UnitaryMatrix:
-        """Return the unitary for this gate, see :class:`Unitary` for more."""
-        self.check_parameters(params)
-
-        cos = np.cos(params[0])
-        sin = -1j * np.sin(params[0])
-        phi = np.exp(-1j * params[1])
-
-        return UnitaryMatrix(
-            [
-                [1, 0, 0, 0],
-                [0, cos, sin, 0],
-                [0, sin, cos, 0],
-                [0, 0, 0, phi],
-            ],
-        )

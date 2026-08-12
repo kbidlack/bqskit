@@ -15,7 +15,6 @@ class RCCXGate(Gate, CachedClass):
         - https://arxiv.org/pdf/1508.03273.pdf
     """
 
-    _num_qudits = 3
     _qasm_name = 'rccx'
     _expr = _UnitaryExpression(
         'RCCX() { [[1,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0],'
@@ -36,7 +35,6 @@ class RC3XGate(Gate, CachedClass):
         - https://arxiv.org/pdf/1508.03273.pdf
     """
 
-    _num_qudits = 4
     _qasm_name = 'rc3x'
     _expr = _UnitaryExpression(
         'RC3X() { ['

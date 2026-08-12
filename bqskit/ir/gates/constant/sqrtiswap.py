@@ -23,7 +23,6 @@ class SqrtISwapGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
     _qasm_name = 'sqisw'
     _expr = _UnitaryExpression(
         'SqrtISwap() { [[1,0,0,0],[0,1/sqrt(2),i/sqrt(2),0],'

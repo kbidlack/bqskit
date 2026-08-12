@@ -21,8 +21,6 @@ class SqrtXGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 1
-    _qasm_name = 'sx'
     _expr = _SXGate()
 
 

@@ -5,7 +5,6 @@ from openqudit.expressions import HGate as _HGate
 
 from bqskit.ir.gates.constantgate import ConstantGate
 from bqskit.utils.cachedclass import CachedClass
-from bqskit.utils.typing import is_integer
 
 
 class HGate(ConstantGate, CachedClass):
@@ -42,10 +41,6 @@ class HGate(ConstantGate, CachedClass):
         - https://pubs.aip.org/aip/jmp/article-abstract/56/3/032202/763827
     """
 
-    _num_qudits = 1
-    _num_params = 0
-    _qasm_name = 'h'
-
     def __init__(self, radix: int = 2) -> None:
         """
         Construct a HGate.
@@ -57,11 +52,5 @@ class HGate(ConstantGate, CachedClass):
         Raises:
             ValueError: if radix < 2
         """
-        if not is_integer(radix):
-            raise TypeError(f"Expected integer for radix, got {type(radix)}.")
-
-        if radix < 2:
-            raise ValueError(f"Radix must be greater than 1, got {radix}.")
-
         self._radix = radix
         self._expr = _HGate(radix)

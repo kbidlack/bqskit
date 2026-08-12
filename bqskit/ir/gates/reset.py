@@ -10,6 +10,8 @@ from bqskit.utils.cachedclass import CachedClass
 class Reset(Gate, CachedClass):
     """Pseudogate to reset/initialize the qudit to |0>."""
 
+    _qasm_name = 'reset'
+
     def __init__(self, radix: int = 2) -> None:
         """
         Construct a Reset.
@@ -18,7 +20,6 @@ class Reset(Gate, CachedClass):
             radix (int): the dimension of the qudit. (Default: 2)
         """
         self._num_qudits = 1
-        self._qasm_name = 'reset'
         self._radixes = tuple([radix])
         self._num_params = 0
 

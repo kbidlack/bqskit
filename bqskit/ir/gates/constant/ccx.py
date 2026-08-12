@@ -28,8 +28,6 @@ class CCXGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 3
-    _qasm_name = 'ccx'
     _expr = _Controlled(_XGate(), [2, 2])
 
 

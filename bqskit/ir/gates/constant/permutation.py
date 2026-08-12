@@ -13,8 +13,6 @@ from bqskit.utils.cachedclass import CachedClass
 class PermutationGate(Gate, CachedClass):
     """A Permutation Gate."""
 
-    _num_params = 0
-
     def __init__(
         self,
         num_qudits: int,
@@ -37,8 +35,6 @@ class PermutationGate(Gate, CachedClass):
         if num_qudits <= 0:
             raise ValueError('Expected positive integer, got %d' % num_qudits)
 
-        self._num_qudits = num_qudits
-        self._radixes = tuple([2] * num_qudits)
         self.location = tuple(location)
 
         dim = 2 ** num_qudits

@@ -20,7 +20,6 @@ class BGate(Gate, CachedClass):
         - https://arxiv.org/pdf/quant-ph/0312193.pdf
     """
 
-    _num_qudits = 2
     _qasm_name = 'b'
     _expr = _UnitaryExpression(
         'B() { [[cos(pi/8),0,0,i*sin(pi/8)],'

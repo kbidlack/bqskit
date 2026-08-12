@@ -24,6 +24,5 @@ class CTGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _name = 'CTGate'
     _qasm_name = 'ct'
     _expr = _Controlled(_TGate())

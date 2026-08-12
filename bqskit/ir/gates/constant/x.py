@@ -21,6 +21,4 @@ class XGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 1
-    _qasm_name = 'x'
     _expr = _XGate()

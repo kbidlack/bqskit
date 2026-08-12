@@ -33,7 +33,6 @@ class IToffoliGate(Gate, CachedClass):
         (2022). https://doi.org/10.1038/s41567-022-01590-3
     """
 
-    _num_qudits = 3
     _qasm_name = 'iccx'
     _expr = _Controlled(
         _UnitaryExpression('iX() { [[0,i],[i,0]] }'), [2, 2],

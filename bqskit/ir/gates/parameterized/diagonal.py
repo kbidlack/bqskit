@@ -31,12 +31,10 @@ class DiagonalGate(
         self,
         num_qudits: int = 2,
     ):
-        self._num_qudits = num_qudits
         # 1 parameter per diagonal element, removing one for global phase
-        self._num_params = 2 ** num_qudits - 1
-
+        num_params = 2 ** num_qudits - 1
         dim = 2 ** num_qudits
-        params = ['t%d' % j for j in range(self._num_params)]
+        params = ['t%d' % j for j in range(num_params)]
         rows = []
         for r in range(dim):
             row = ['0'] * dim

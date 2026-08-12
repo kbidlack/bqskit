@@ -19,6 +19,4 @@ class SGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 1
-    _qasm_name = 's'
     _expr = _SGate()

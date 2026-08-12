@@ -21,5 +21,4 @@ class RZGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _qasm_name = 'rz'
     _expr = _RZGate()

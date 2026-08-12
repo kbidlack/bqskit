@@ -5,7 +5,6 @@ from openqudit.expressions import SwapGate as _SwapGate
 
 from bqskit.ir.gate import Gate
 from bqskit.utils.cachedclass import CachedClass
-from bqskit.utils.typing import is_integer
 
 
 class SwapGate(Gate, CachedClass):
@@ -36,17 +35,8 @@ class SwapGate(Gate, CachedClass):
         Raises:
             ValueError: If radix is less than two.
         """
-        if not is_integer(radix):
-            raise TypeError('Expected a single integer radix.')
 
-        if radix < 2:
-            raise ValueError('Radix must be at least 2.')
-
-        self._num_qudits = 2
-        self._radixes = (radix, radix)
-        self._dim = radix * radix
         self._expr = _SwapGate(radix)
-        self._qasm_name = 'swap'
 
     def __eq__(self, other: object) -> bool:
         return (

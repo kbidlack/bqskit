@@ -28,7 +28,6 @@ class RXGate(
         \\end{pmatrix}
     """
 
-    _qasm_name = 'rx'
     _expr = _RXGate()
 
     def optimize(self, env_matrix: npt.NDArray[np.complex128]) -> list[float]:

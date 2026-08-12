@@ -28,7 +28,6 @@ class U1Gate(
         \\end{pmatrix}
     """
 
-    _qasm_name = 'u1'
     _expr = _U1Gate()
 
     def optimize(self, env_matrix: npt.NDArray[np.complex128]) -> list[float]:

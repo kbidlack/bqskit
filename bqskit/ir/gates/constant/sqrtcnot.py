@@ -23,7 +23,6 @@ class SqrtCNOTGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
     _qasm_name = 'csx'
     _expr = _UnitaryExpression(
         'SqrtCNOT() { [[1,0,0,0],[0,1,0,0],'

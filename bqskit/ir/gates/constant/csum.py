@@ -42,9 +42,6 @@ class CSUMGate(ConstantGate):
         - https://pubs.aip.org/aip/jmp/article-abstract/56/3/032202/763827
     """
 
-    _num_qudits = 2
-    _num_params = 0
-
     def __init__(self, radix: int = 3) -> None:
         """
         Construct a CSUMGate.

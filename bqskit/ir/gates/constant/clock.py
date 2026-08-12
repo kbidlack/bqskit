@@ -5,7 +5,6 @@ from openqudit.expressions import ZGate as _ZGate
 
 from bqskit.ir.gate import Gate
 from bqskit.utils.cachedclass import CachedClass
-from bqskit.utils.typing import is_integer
 
 
 class ClockGate(Gate, CachedClass):
@@ -24,8 +23,6 @@ class ClockGate(Gate, CachedClass):
         - https://arxiv.org/pdf/2302.07966.pdf
     """
 
-    _num_qudits = 1
-
     def __init__(self, radix: int = 3) -> None:
         """
         Construct a ClockGate.
@@ -37,11 +34,4 @@ class ClockGate(Gate, CachedClass):
         Raises:
             ValueError: if radix < 2
         """
-        if not is_integer(radix):
-            raise TypeError(f'Expected integer for radix, got {type(radix)}.')
-
-        if radix < 2:
-            raise ValueError(f'Radix must be greater than 1, got {radix}.')
-
-        self._radix = radix
         self._expr = _ZGate(radix)

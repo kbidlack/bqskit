@@ -29,9 +29,6 @@ class PDGate(Gate, CachedClass):
         - https://pubs.aip.org/aip/jmp/article-abstract/56/3/032202/763827
     """
 
-    _num_qudits = 1
-    _num_params = 0
-
     def __init__(self, index: int, radix: int = 3) -> None:
         """
         Construct a PDGate.
@@ -62,7 +59,6 @@ class PDGate(Gate, CachedClass):
                 f'got: {index=}; {radix=}.',
             )
 
-        self._radix = radix
         self.index = index
 
         diag = '~e^(i*4*%d*π/%d)' % (index, radix)

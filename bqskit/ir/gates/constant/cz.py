@@ -24,6 +24,4 @@ class CZGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
-    _qasm_name = 'cz'
     _expr = _Controlled(_ZGate())

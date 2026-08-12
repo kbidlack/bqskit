@@ -24,6 +24,4 @@ class CYGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
-    _qasm_name = 'cy'
     _expr = _Controlled(_YGate())

@@ -23,7 +23,6 @@ class ZZGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
-    _num_qudits = 2
     _qasm_name = 'rzz(pi/2)'
     _expr = _UnitaryExpression(
         'ZZ() { [[sqrt(2)/2-i*sqrt(2)/2,0,0,0],'
