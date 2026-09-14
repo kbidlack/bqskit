@@ -25,3 +25,4 @@ class CZGate(Gate, CachedClass):
     """
 
     _expr = _Controlled(_ZGate())
+    _qasm_name = 'cz'

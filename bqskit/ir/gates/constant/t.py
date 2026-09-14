@@ -20,3 +20,4 @@ class TGate(Gate, CachedClass):
     """
 
     _expr = _TGate()
+    _qasm_name = 't'

@@ -33,6 +33,8 @@ class XGate(Gate, CachedClass):
     3 levels is a qutrit, etc.)
     """
 
+    _qasm_name = 'x'
+
     def __init__(self, radix: int = 2) -> None:
         """
         Construct an XGate.

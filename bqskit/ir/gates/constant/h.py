@@ -54,3 +54,4 @@ class HGate(ConstantGate, CachedClass):
         """
         self._radix = radix
         self._expr = _HGate(radix)
+        _qasm_name = 'h'

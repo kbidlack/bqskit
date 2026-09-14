@@ -29,6 +29,7 @@ class CCXGate(Gate, CachedClass):
     """
 
     _expr = _Controlled(_XGate(), [2, 2])
+    _qasm_name = 'ccx'
 
 
 ToffoliGate = CCXGate

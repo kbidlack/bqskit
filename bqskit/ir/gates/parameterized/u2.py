@@ -23,3 +23,4 @@ class U2Gate(Gate, CachedClass):
     """
 
     _expr = _U2Gate()
+    _qasm_name = 'u2'

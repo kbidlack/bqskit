@@ -25,3 +25,4 @@ class CYGate(Gate, CachedClass):
     """
 
     _expr = _Controlled(_YGate())
+    _qasm_name = 'cy'

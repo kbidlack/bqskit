@@ -21,3 +21,4 @@ class SdgGate(Gate, CachedClass):
     """
 
     _expr = _Dagger(_SGate())
+    _qasm_name = 'sdg'

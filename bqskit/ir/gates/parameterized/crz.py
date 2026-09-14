@@ -28,3 +28,4 @@ class CRZGate(
     """
 
     _expr = _Controlled(_RZGate())
+    _qasm_name = 'crz'

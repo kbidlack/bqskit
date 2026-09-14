@@ -29,6 +29,7 @@ class RYGate(
     """
 
     _expr = _RYGate()
+    _qasm_name = 'ry'
 
     def optimize(self, env_matrix: npt.NDArray[np.complex128]) -> list[float]:
         """

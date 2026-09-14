@@ -23,6 +23,7 @@ class SqrtXdgGate(Gate, CachedClass):
     """
 
     _expr = _Dagger(_SXGate())
+    _qasm_name = 'sxdg'
 
 
 SXdgGate = SqrtXdgGate

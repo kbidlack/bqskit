@@ -27,3 +27,4 @@ class RZZGate(
     """
 
     _expr = _RZZGate()
+    _qasm_name = 'rzz'

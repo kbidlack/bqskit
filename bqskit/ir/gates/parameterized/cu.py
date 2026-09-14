@@ -29,7 +29,7 @@ class CUGate(
     """
 
     # cannot use `Controlled(U3Gate())` because of global phase
-    _qasm_name = 'cu3'
+    _qasm_name = 'cu'
     _expr = _UnitaryExpression(
         'CU(t0,t1,t2,t3) { [[1,0,0,0],[0,1,0,0],'
         '[0,0,e^(i*t3)*cos(t0/2),~e^(i*(t3+t2))*sin(t0/2)],'

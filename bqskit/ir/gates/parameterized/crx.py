@@ -28,3 +28,4 @@ class CRXGate(
     """
 
     _expr = _Controlled(_RXGate())
+    _qasm_name = 'crx'

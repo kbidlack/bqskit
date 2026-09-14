@@ -21,3 +21,4 @@ class TdgGate(Gate, CachedClass):
     """
 
     _expr = _Dagger(_TGate())
+    _qasm_name = 'tdg'

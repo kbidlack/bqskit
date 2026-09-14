@@ -22,6 +22,7 @@ class SqrtXGate(Gate, CachedClass):
     """
 
     _expr = _SXGate()
+    _qasm_name = 'sx'
 
 
 SXGate = SqrtXGate

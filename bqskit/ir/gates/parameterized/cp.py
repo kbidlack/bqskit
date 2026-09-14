@@ -28,3 +28,4 @@ class CPGate(
     """
 
     _expr = _Controlled(_PGate())
+    _qasm_name = 'cp'

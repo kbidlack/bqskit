@@ -22,3 +22,4 @@ class ZGate(Gate, CachedClass):
     """
 
     _expr = _ZGate()
+    _qasm_name = 'z'

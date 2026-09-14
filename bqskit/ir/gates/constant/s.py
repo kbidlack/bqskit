@@ -51,3 +51,4 @@ class SGate(Gate, CachedClass):
         """
         self._radix = radix
         self._expr = _SGate(radix)
+        _qasm_name = 's'

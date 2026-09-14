@@ -31,6 +31,7 @@ class RXXGate(
     """
 
     _expr = _RXXGate()
+    _qasm_name = 'rxx'
 
     def optimize(self, env_matrix: npt.NDArray[np.complex128]) -> list[float]:
         """

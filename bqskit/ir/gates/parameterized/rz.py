@@ -22,3 +22,4 @@ class RZGate(Gate, CachedClass):
     """
 
     _expr = _RZGate()
+    _qasm_name = 'rz'

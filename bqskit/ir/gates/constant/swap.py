@@ -24,6 +24,8 @@ class SwapGate(Gate, CachedClass):
         \\end{pmatrix}
     """
 
+    _qasm_name = 'swap'
+
     def __init__(self, radix: int = 2) -> None:
         """
         Create a swap gate, defaulting to the qubit swap gate.

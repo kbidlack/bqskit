@@ -22,3 +22,4 @@ class YGate(Gate, CachedClass):
     """
 
     _expr = _YGate()
+    _qasm_name = 'y'

@@ -25,3 +25,4 @@ class CHGate(Gate, CachedClass):
     """
 
     _expr = _Controlled(_HGate())
+    _qasm_name = 'ch'

@@ -144,14 +144,11 @@ class Gate(Unitary):
     @property
     def qasm_name(self) -> str:
         """The qasm identifier for this gate."""
+        if not self.is_qubit_only():
+            raise AttributeError('QASM2 only supports qubit gates.')
+
         if hasattr(self, '_qasm_name'):
             return self._qasm_name
-
-        if (
-            hasattr(self, '_expr')
-            and (qasm_name := self._expr.qasm_name()) is not None
-        ):
-            return qasm_name
 
         raise AttributeError(
             f'{repr(self)} has no QASM2 definition',

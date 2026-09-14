@@ -28,3 +28,4 @@ class CRYGate(
     """
 
     _expr = _Controlled(_RYGate())
+    _qasm_name = 'cry'

@@ -25,6 +25,7 @@ class CNOTGate(Gate, CachedClass):
     """
 
     _expr = _Controlled(_XGate())
+    _qasm_name = 'cx'
 
 
 CXGate = CNOTGate
