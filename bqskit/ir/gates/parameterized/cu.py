@@ -1,7 +1,8 @@
 """This module implements the CUGate."""
 from __future__ import annotations
 
-from openqudit.expressions import UnitaryExpression as _UnitaryExpression
+from openqudit.expressions import Controlled as _Controlled
+from openqudit.expressions import U3Gate as _U3Gate
 
 from bqskit.ir.gate import Gate
 from bqskit.utils.cachedclass import CachedClass
@@ -28,10 +29,5 @@ class CUGate(
         \\end{pmatrix}
     """
 
-    # cannot use `Controlled(U3Gate())` because of global phase
     _qasm_name = 'cu'
-    _expr = _UnitaryExpression(
-        'CU(t0,t1,t2,t3) { [[1,0,0,0],[0,1,0,0],'
-        '[0,0,e^(i*t3)*cos(t0/2),~e^(i*(t3+t2))*sin(t0/2)],'
-        '[0,0,e^(i*(t3+t1))*sin(t0/2),e^(i*(t3+t1+t2))*cos(t0/2)]] }',
-    )
+    _expr = _Controlled(_U3Gate())
